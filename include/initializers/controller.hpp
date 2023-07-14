@@ -21,7 +21,7 @@ namespace SGE
     /**
      * \brief Takes initializers from queue, and do initialise each one in right order
      */
-    void init();
+    int init();
     void quit();
 
    private:

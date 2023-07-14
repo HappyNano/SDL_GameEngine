@@ -1,23 +1,16 @@
 #include <iostream>
 #include <SDL3/SDL.h>
+#include "engine.hpp"
 
 int main(int argc, char * argv[])
 {
-  if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
-  {
-    SDL_Log("SDL_Init failed (%s)", SDL_GetError());
-    return 1;
-  }
+  SGE::Engine engine;
 
-  SDL_Window * window = NULL;
-  SDL_Renderer * renderer = NULL;
+  engine.init();
 
-  if (SDL_CreateWindowAndRenderer(640, 480, 0, &window, &renderer) < 0)
-  {
-    SDL_Log("SDL_CreateWindowAndRenderer failed (%s)", SDL_GetError());
-    SDL_Quit();
-    return 1;
-  }
+  SDL_Window * window = engine.get_window();
+  SDL_Renderer * renderer = engine.get_renderer();
+
   SDL_SetWindowTitle(window, "SDL issue");
 
   while (1)
@@ -42,8 +35,5 @@ int main(int argc, char * argv[])
     SDL_RenderPresent(renderer);
   }
 
-  SDL_DestroyRenderer(renderer);
-  SDL_DestroyWindow(window);
-
-  SDL_Quit();
+  engine.quit();
 }

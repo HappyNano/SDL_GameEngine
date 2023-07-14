@@ -18,7 +18,7 @@ void SGE::InitializerController::add(initializer_shared_t initializer)
 
 int SGE::InitializerController::init()
 {
-  while (_inits_queue.empty())
+  while (!_inits_queue.empty())
   {
     auto initializer = _inits_queue.front();
     _inits_queue.pop();
@@ -35,7 +35,7 @@ int SGE::InitializerController::init()
 
 void SGE::InitializerController::quit()
 {
-  while (_inits_stack.empty())
+  while (!_inits_stack.empty())
   {
     auto initializer = _inits_stack.top();
     _inits_stack.pop();

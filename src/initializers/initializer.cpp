@@ -16,7 +16,7 @@ int SGE::Initializer::init()
     return -1;
   }
   auto return_value = do_init();
-  if (return_value)
+  if (return_value == 0)
   {
     is_initialized = true;
   }

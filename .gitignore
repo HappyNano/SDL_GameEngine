@@ -1,0 +1,7 @@
+*.o
+build/
+.clang-format
+.vscode/
+pixel_game
+SDL_GameEngine
+out

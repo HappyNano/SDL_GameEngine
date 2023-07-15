@@ -38,22 +38,20 @@ if(NOT SDL3_FOUND AND EXISTS "${EXTERNAL_DIR}/SDL/CMakeLists.txt")
     set(SDL3_FOUND TRUE)
 endif()
 
-# # 3. Download SDL, and use that.
-# if(NOT SDL3_FOUND)
-#     include(FetchContent)
-#     set(SDL_SHARED TRUE CACHE BOOL "Build a SDL shared library (if available)")
-#     set(SDL_STATIC TRUE CACHE BOOL "Build a SDL static library (if available)")
-#     FetchContent_Declare(
-#         SDL
-#         GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-#         GIT_TAG main  # Replace this with a particular git tag or git hash
-#         GIT_SHALLOW TRUE
-#         GIT_PROGRESS TRUE
-#     )
-#     message(STATUS "Using SDL3 via FetchContent")
-#     FetchContent_MakeAvailable(SDL)
-#     set_property(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/_deps/sdl-src" PROPERTY EXCLUDE_FROM_ALL TRUE)
-# endif()
+# ====================
+
+# 1. Try system SDL3_ttf package first
+find_package(SDL3_ttf QUIET)
+if(SDL3_ttf_FOUND)
+    message(STATUS "Using SDL3_ttf via find_package")
+endif()
+
+# 2. Try using a vendored SDL library
+if(NOT SDL3_ttf_FOUND AND EXISTS "${EXTERNAL_DIR}/SDL_ttf/CMakeLists.txt")
+    add_subdirectory(${EXTERNAL_DIR}/SDL_ttf)
+    message(STATUS "Using SDL3_ttf via add_subdirectory")
+    set(SDL3_FOUND TRUE)
+endif()
 
 # ====================
 
@@ -63,7 +61,7 @@ include_directories(${INCLUDE_DIR})
 # Создаем исполняемый файл
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_ttf::SDL3_ttf SDL3::SDL3)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY})
 

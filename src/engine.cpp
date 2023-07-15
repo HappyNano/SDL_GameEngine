@@ -3,10 +3,12 @@
 SGE::Engine::Engine():
   _init_controller{},
   _sdl_initializer{ std::make_shared< SDL_Initializer >() },
-  _window_initializer{ std::make_shared< Window_Initializer >(500, 500) }
+  _window_initializer{ std::make_shared< Window_Initializer >(500, 500) },
+  _ttf_initializer{ std::make_shared< TTF_Initializer >() }
 {
   _init_controller.add(_sdl_initializer);
   _init_controller.add(_window_initializer);
+  _init_controller.add(_ttf_initializer);
 }
 
 int SGE::Engine::init()

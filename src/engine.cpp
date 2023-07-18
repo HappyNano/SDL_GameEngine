@@ -4,7 +4,9 @@ SGE::Engine::Engine():
   _init_controller{},
   _sdl_initializer{ std::make_shared< SDL_Initializer >() },
   _window_initializer{ std::make_shared< Window_Initializer >(500, 500) },
-  _ttf_initializer{ std::make_shared< TTF_Initializer >() }
+  _ttf_initializer{ std::make_shared< TTF_Initializer >() },
+  _window{},
+  _renderer{}
 {
   _init_controller.add(_sdl_initializer);
   _init_controller.add(_window_initializer);
@@ -13,20 +15,25 @@ SGE::Engine::Engine():
 
 int SGE::Engine::init()
 {
-  return _init_controller.init();
+  auto return_value = _init_controller.init();
+  _window.set_window(_window_initializer->get_window());
+  _renderer.set_renderer(_window_initializer->get_renderer());
+  return return_value;
 }
 
 void SGE::Engine::quit()
 {
+  _window.set_window(nullptr);
+  _renderer.set_renderer(nullptr);
   _init_controller.quit();
 }
 
-SDL_Window * SGE::Engine::get_window()
+SGE::Window & SGE::Engine::window()
 {
-  return _window_initializer->get_window();
+  return _window;
 }
 
-SDL_Renderer * SGE::Engine::get_renderer()
+SGE::Renderer & SGE::Engine::renderer()
 {
-  return _window_initializer->get_renderer();
+  return _renderer;
 }

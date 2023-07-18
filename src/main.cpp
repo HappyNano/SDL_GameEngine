@@ -8,10 +8,7 @@ int main(int argc, char * argv[])
 
   engine.init();
 
-  SDL_Window * window = engine.get_window();
-  SDL_Renderer * renderer = engine.get_renderer();
-
-  SDL_SetWindowTitle(window, "SDL issue");
+  engine.window().set_title("SDL_GameEngine");
 
   while (1)
   {
@@ -30,9 +27,9 @@ int main(int argc, char * argv[])
       break;
     }
 
-    SDL_SetRenderDrawColor(renderer, 255, 80, 80, SDL_ALPHA_OPAQUE);
-    SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
+    engine.renderer().setDrawColor(255, 80, 80, SDL_ALPHA_OPAQUE);
+    engine.renderer().clear();
+    engine.renderer().present();
   }
 
   engine.quit();

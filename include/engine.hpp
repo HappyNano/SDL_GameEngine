@@ -8,6 +8,9 @@
 #include "initializers/window_initializer.hpp"
 #include "initializers/ttf_initializer.hpp"
 
+#include "window.hpp"
+#include "renderer.hpp"
+
 namespace SGE
 {
   class Engine final
@@ -19,8 +22,8 @@ namespace SGE
     int init();
     void quit();
 
-    SDL_Window * get_window();
-    SDL_Renderer * get_renderer();
+    Window & window();
+    Renderer & renderer();
 
    private:
     SGE::InitializerController _init_controller;
@@ -28,6 +31,9 @@ namespace SGE
     std::shared_ptr< SGE::SDL_Initializer > _sdl_initializer;
     std::shared_ptr< SGE::Window_Initializer > _window_initializer;
     std::shared_ptr< SGE::TTF_Initializer > _ttf_initializer;
+
+    Window _window;
+    Renderer _renderer;
   };
 }
 

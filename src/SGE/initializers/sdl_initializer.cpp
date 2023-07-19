@@ -1,4 +1,4 @@
-#include "initializers/sdl_initializer.hpp"
+#include "SGE/initializers/sdl_initializer.hpp"
 
 int SGE::SDL_Initializer::do_init()
 {

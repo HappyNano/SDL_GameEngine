@@ -1,4 +1,4 @@
-#include "initializers/window_initializer.hpp"
+#include "SGE/initializers/window_initializer.hpp"
 
 SGE::Window_Initializer::Window_Initializer(int width, int height):
   _width{ width },

@@ -1,4 +1,4 @@
-#include "initializers/initializer.hpp"
+#include "SGE/initializers/initializer.hpp"
 
 SGE::Initializer::Initializer():
   is_initialized{ false }

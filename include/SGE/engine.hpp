@@ -3,13 +3,13 @@
 
 #include <memory>
 
-#include "initializers/controller.hpp"
-#include "initializers/sdl_initializer.hpp"
-#include "initializers/window_initializer.hpp"
-#include "initializers/ttf_initializer.hpp"
+#include "SGE/initializers/controller.hpp"
+#include "SGE/initializers/sdl_initializer.hpp"
+#include "SGE/initializers/window_initializer.hpp"
+#include "SGE/initializers/ttf_initializer.hpp"
 
-#include "window.hpp"
-#include "renderer.hpp"
+#include "SGE/window.hpp"
+#include "SGE/renderer.hpp"
 
 namespace SGE
 {

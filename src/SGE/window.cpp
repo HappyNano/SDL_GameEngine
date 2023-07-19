@@ -1,4 +1,4 @@
-#include "window.hpp"
+#include "SGE/window.hpp"
 
 SGE::Window::Window():
   _window{ nullptr }

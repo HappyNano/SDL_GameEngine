@@ -3,7 +3,7 @@
 
 #include <SDL3/SDL.h>
 
-#include "initializers/initializer.hpp"
+#include "SGE/initializers/initializer.hpp"
 
 namespace SGE
 {

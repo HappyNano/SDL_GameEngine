@@ -1,4 +1,4 @@
-#include "renderer.hpp"
+#include "SGE/renderer.hpp"
 
 SGE::Renderer::Renderer():
   _renderer{ nullptr }

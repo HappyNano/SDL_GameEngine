@@ -5,7 +5,7 @@
 #include <stack>
 #include <queue>
 
-#include "initializers/initializer.hpp"
+#include "SGE/initializers/initializer.hpp"
 
 namespace SGE
 {

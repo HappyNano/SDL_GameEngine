@@ -1,6 +1,6 @@
 #include <iostream>
 #include <SDL3/SDL.h>
-#include "engine.hpp"
+#include "SGE/engine.hpp"
 
 int main(int argc, char * argv[])
 {

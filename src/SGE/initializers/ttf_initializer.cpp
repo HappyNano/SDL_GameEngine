@@ -1,4 +1,4 @@
-#include "initializers/ttf_initializer.hpp"
+#include "SGE/initializers/ttf_initializer.hpp"
 
 int SGE::TTF_Initializer::do_init()
 {

@@ -1,4 +1,4 @@
-#include "initializers/controller.hpp"
+#include "SGE/initializers/controller.hpp"
 
 SGE::InitializerController::InitializerController():
   _inits_stack{},

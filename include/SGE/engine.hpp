@@ -11,6 +11,8 @@
 #include "SGE/window.hpp"
 #include "SGE/renderer.hpp"
 
+#include "SGE/scenes/scene.hpp"
+
 namespace SGE
 {
   class Engine final
@@ -21,6 +23,11 @@ namespace SGE
 
     int init();
     void quit();
+
+    void setScene(std::shared_ptr< SGE::Scene > scene);
+
+    void run();
+    void stop();
 
     Window & window();
     Renderer & renderer();
@@ -34,6 +41,9 @@ namespace SGE
 
     Window _window;
     Renderer _renderer;
+
+    std::shared_ptr< SGE::Scene > _main_scene;
+    bool running;
   };
 }
 

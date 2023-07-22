@@ -32,3 +32,15 @@ void SGE::Renderer::setDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
   SDL_SetRenderDrawColor(_renderer, r, g, b, a);
 }
+
+void SGE::Renderer::setDrawColor(const SDL_Color & clr)
+{
+  SDL_SetRenderDrawColor(_renderer, clr.r, clr.g, clr.b, clr.a);
+}
+
+SDL_Color SGE::Renderer::getDrawColor()
+{
+  SDL_Color tmpClr{ 0, 0, 0, 0 };
+  SDL_GetRenderDrawColor(_renderer, &tmpClr.r, &tmpClr.g, &tmpClr.b, &tmpClr.a);
+  return tmpClr;
+}

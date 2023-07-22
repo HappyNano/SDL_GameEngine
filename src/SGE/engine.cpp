@@ -28,6 +28,42 @@ void SGE::Engine::quit()
   _init_controller.quit();
 }
 
+void SGE::Engine::setScene(std::shared_ptr< SGE::Scene > scene)
+{
+  _main_scene = scene;
+  _main_scene->load();
+}
+
+void SGE::Engine::run()
+{
+  running = true;
+  while (running)
+  {
+    SDL_Event event;
+    while (SDL_PollEvent(&event))
+    {
+      if (event.type == SDL_EVENT_QUIT)
+      {
+        this->stop();
+        break;
+      }
+    }
+    if (!running)
+    {
+      break;
+    }
+
+    renderer().clear();
+    _main_scene->mloop();
+    renderer().present();
+  }
+}
+
+void SGE::Engine::stop()
+{
+  running = false;
+}
+
 SGE::Window & SGE::Engine::window()
 {
   return _window;

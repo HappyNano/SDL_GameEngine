@@ -22,6 +22,8 @@ namespace SGE
     void present();
 
     void setDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+    void setDrawColor(const SDL_Color & clr);
+    SDL_Color getDrawColor();
 
    private:
     SDL_Renderer * _renderer;

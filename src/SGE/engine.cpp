@@ -1,9 +1,10 @@
 #include "SGE/engine.hpp"
 
-SGE::Engine::Engine():
+SGE::Engine::Engine(cfgScreen_t cfgScreen):
+  _cfgScreen{ cfgScreen },
   _init_controller{},
   _sdl_initializer{ std::make_shared< SDL_Initializer >() },
-  _window_initializer{ std::make_shared< Window_Initializer >(500, 500) },
+  _window_initializer{ std::make_shared< Window_Initializer >(cfgScreen->width, cfgScreen->height) },
   _ttf_initializer{ std::make_shared< TTF_Initializer >() },
   _window{},
   _renderer{}

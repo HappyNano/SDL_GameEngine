@@ -39,7 +39,10 @@ namespace
 
 int main(int argc, char * argv[])
 {
-  SGE::Engine engine;
+  SGE::Config cfg("config.file");
+  auto cfgScreen = std::make_shared< SGE::CfgScreen >(cfg);
+
+  SGE::Engine engine(cfgScreen);
 
   engine.init();
 

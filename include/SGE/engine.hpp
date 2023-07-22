@@ -3,6 +3,8 @@
 
 #include <memory>
 
+#include "SGE/config/cfg_screen.hpp"
+
 #include "SGE/initializers/controller.hpp"
 #include "SGE/initializers/sdl_initializer.hpp"
 #include "SGE/initializers/window_initializer.hpp"
@@ -18,7 +20,9 @@ namespace SGE
   class Engine final
   {
    public:
-    Engine();
+    using cfgScreen_t = std::shared_ptr< SGE::CfgScreen >;
+
+    Engine(cfgScreen_t cfgScreen);
     ~Engine() = default;
 
     int init();
@@ -33,6 +37,8 @@ namespace SGE
     Renderer & renderer();
 
    private:
+    cfgScreen_t _cfgScreen;
+
     SGE::InitializerController _init_controller;
 
     std::shared_ptr< SGE::SDL_Initializer > _sdl_initializer;
@@ -44,6 +50,8 @@ namespace SGE
 
     std::shared_ptr< SGE::Scene > _main_scene;
     bool running;
+
+    // TODO: Scene Manager
   };
 }
 

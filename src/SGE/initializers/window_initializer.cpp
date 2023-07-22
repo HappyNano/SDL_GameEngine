@@ -19,7 +19,7 @@ SDL_Renderer * SGE::Window_Initializer::get_renderer()
 
 int SGE::Window_Initializer::do_init()
 {
-  return SDL_CreateWindowAndRenderer(640, 480, 0, &_window_ptr, &_renderer_ptr) < 0;
+  return SDL_CreateWindowAndRenderer(_width, _height, 0, &_window_ptr, &_renderer_ptr) < 0;
 }
 
 void SGE::Window_Initializer::do_quit()

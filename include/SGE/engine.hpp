@@ -20,9 +20,7 @@ namespace SGE
   class Engine final
   {
    public:
-    using cfgScreen_t = std::shared_ptr< SGE::CfgScreen >;
-
-    Engine(cfgScreen_t cfgScreen);
+    Engine(const SGE::CfgScreen & cfgScreen);
     ~Engine() = default;
 
     int init();
@@ -37,8 +35,6 @@ namespace SGE
     Renderer & renderer();
 
    private:
-    cfgScreen_t _cfgScreen;
-
     SGE::InitializerController _init_controller;
 
     std::shared_ptr< SGE::SDL_Initializer > _sdl_initializer;

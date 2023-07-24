@@ -50,7 +50,22 @@ endif()
 if(NOT SDL3_ttf_FOUND AND EXISTS "${EXTERNAL_DIR}/SDL_ttf/CMakeLists.txt")
     add_subdirectory(${EXTERNAL_DIR}/SDL_ttf)
     message(STATUS "Using SDL3_ttf via add_subdirectory")
-    set(SDL3_FOUND TRUE)
+    set(SDL3_ttf_FOUND TRUE)
+endif()
+
+# ====================
+
+# 1. Try system SDL3_image package first
+find_package(SDL3_image QUIET)
+if(SDL3_image_FOUND)
+    message(STATUS "Using SDL3_image via find_package")
+endif()
+
+# 2. Try using a vendored SDL library
+if(NOT SDL3_image_FOUND AND EXISTS "${EXTERNAL_DIR}/SDL_image/CMakeLists.txt")
+    add_subdirectory(${EXTERNAL_DIR}/SDL_image)
+    message(STATUS "Using SDL3_image via add_subdirectory")
+    set(SDL3_image_FOUND TRUE)
 endif()
 
 # ====================
@@ -61,7 +76,7 @@ include_directories(${INCLUDE_DIR})
 # Создаем исполняемый файл
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_ttf::SDL3_ttf SDL3::SDL3)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_image::SDL3_image SDL3_ttf::SDL3_ttf SDL3::SDL3)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY})
 

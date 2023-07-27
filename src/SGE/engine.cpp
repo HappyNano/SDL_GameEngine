@@ -5,6 +5,7 @@ SGE::Engine::Engine(const SGE::CfgScreen & cfgScreen):
   _sdl_initializer{ std::make_shared< SDL_Initializer >() },
   _window_initializer{ std::make_shared< Window_Initializer >(cfgScreen.width, cfgScreen.height) },
   _ttf_initializer{ std::make_shared< TTF_Initializer >() },
+  _img_initializer{ std::make_shared< IMG_Initializer >() },
   _window{},
   _renderer{}
 {

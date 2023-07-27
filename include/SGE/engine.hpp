@@ -9,6 +9,7 @@
 #include "SGE/initializers/sdl_initializer.hpp"
 #include "SGE/initializers/window_initializer.hpp"
 #include "SGE/initializers/ttf_initializer.hpp"
+#include "SGE/initializers/img_initializer.hpp"
 
 #include "SGE/window.hpp"
 #include "SGE/renderer.hpp"
@@ -40,6 +41,7 @@ namespace SGE
     std::shared_ptr< SGE::SDL_Initializer > _sdl_initializer;
     std::shared_ptr< SGE::Window_Initializer > _window_initializer;
     std::shared_ptr< SGE::TTF_Initializer > _ttf_initializer;
+    std::shared_ptr< SGE::IMG_Initializer > _img_initializer;
 
     Window _window;
     Renderer _renderer;

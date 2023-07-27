@@ -32,7 +32,6 @@
 *.app
 
 build/
-.clang-format
 .vscode/
 SDL_GameEngine
 out

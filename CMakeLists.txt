@@ -74,10 +74,28 @@ endif()
 include_directories(${INCLUDE_DIR})
 
 # Создаем исполняемый файл
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_image::SDL3_image SDL3_ttf::SDL3_ttf SDL3::SDL3)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY})
 
 include(${SRC_DIR}/src.cmake)
+
+# ====================
+
+# Проверка форматирования с помощью clang-format
+set(CLANG_FORMAT_COMMAND /usr/bin/clang-format-15)
+set(CLANG_FORMAT_FILE ${CMAKE_CURRENT_SOURCE_DIR}/.clang-format)
+
+# Добавляем пользовательскую цель для автоматической правки кода
+add_custom_target(
+    clang-format-fix
+    COMMAND ${CLANG_FORMAT_COMMAND} -style=file -i ${SOURCES}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Running clang-format to fix code style..."
+    VERBATIM
+)
+
+# Добавляем правку кода к цели построения
+add_dependencies(${PROJECT_NAME} clang-format-fix)

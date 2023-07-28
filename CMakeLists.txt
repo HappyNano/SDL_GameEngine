@@ -74,7 +74,7 @@ endif()
 include_directories(${INCLUDE_DIR})
 
 # Создаем исполняемый файл
-add_executable(${PROJECT_NAME})
+add_executable(${PROJECT_NAME} main.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_image::SDL3_image SDL3_ttf::SDL3_ttf SDL3::SDL3)
 

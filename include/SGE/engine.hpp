@@ -50,6 +50,7 @@ namespace SGE
     bool running;
 
     // TODO: Scene Manager
+    // TODO: Event Manager
   };
 }
 

@@ -23,35 +23,38 @@ namespace SGE
      * \brief Get the keyboard keycodes object.
      * \return _event_keeper for keyboard
      */
-    typename KeyboardEventKeeper::Shared get_keyboardKeycodes();
+    typename KeyboardEventKeeper::ConstShared get_keyboardKeycodes();
 
     /**
      * \brief Set the keyboard keycodes object.
      *
-     * \param ekeeper - EventKeeper::Shared object
+     * \param ekeeper - EventKeeper::ConstShared object
      */
-    void set_keyboardKeycodes(KeyboardEventKeeper::Shared ekeeper);
+    void set_keyboardKeycodes(KeyboardEventKeeper::ConstShared ekeeper);
     void unset_keyboardKeycodes();
 
     /**
      * \brief Get the mouse keycodes object.
      * \return _event_keeper for mouse
      */
-    typename MouseEventKeeper::Shared get_mouseKeycodes();
+    typename MouseEventKeeper::ConstShared get_mouseKeycodes();
 
     /**
      * \brief Set the mouse keycodes object.
      *
-     * \param ekeeper - EventKeeper::Shared object
+     * \param ekeeper - EventKeeper::ConstShared object
      */
-    void set_mouseKeycodes(MouseEventKeeper::Shared ekeeper);
+    void set_mouseKeycodes(MouseEventKeeper::ConstShared ekeeper);
     void unset_mouseKeycodes();
 
    private:
-    KeyboardEventKeeper::Shared _keyboard_event_keeper;
-    MouseEventKeeper::Shared _mouse_event_keeper;
+    KeyboardEventKeeper::ConstShared _keyboard_event_keeper;
+    MouseEventKeeper::ConstShared _mouse_event_keeper;
 
-    // TODO: In future do keep mouse events with rects and R-Tree 
+    std::unordered_map< KeyboardEventKeeper::type, bool > _keyboard_actions;
+    std::unordered_map< MouseEventKeeper::type, bool > _mouse_actions;
+
+    // TODO: In future do keep mouse events with rects and R-Tree
   };
 }
 

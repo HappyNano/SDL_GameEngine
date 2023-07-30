@@ -47,12 +47,24 @@ namespace SGE
     void set_mouseKeycodes(MouseEventKeeper::ConstShared ekeeper);
     void unset_mouseKeycodes();
 
+    void handle(SDL_Event * event);
+
+    bool is_keyboardEventPressed(const std::string & name);
+    bool is_keyboardEventReleased(const std::string & name);
+    bool is_mouseEventPressed(const std::string & name);
+    bool is_mouseEventReleased(const std::string & name);
+
    private:
     KeyboardEventKeeper::ConstShared _keyboard_event_keeper;
     MouseEventKeeper::ConstShared _mouse_event_keeper;
 
-    std::unordered_map< KeyboardEventKeeper::type, bool > _keyboard_actions;
-    std::unordered_map< MouseEventKeeper::type, bool > _mouse_actions;
+    std::unordered_map< KeyboardEventKeeper::type, bool > _keyboard_active;
+    std::unordered_map< MouseEventKeeper::type, bool > _mouse_active;
+
+    // TODO: Refactor in future
+
+    void keyboardEventHandle(SDL_Event * event, bool isPressed);
+    void mouseEventHandle(SDL_Event * event, bool isPressed);
 
     // TODO: In future do keep mouse events with rects and R-Tree
   };

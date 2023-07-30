@@ -1,4 +1,5 @@
 #include "SGE/engine.hpp"
+#include <iostream>
 
 SGE::Engine::Engine(const SGE::CfgScreen & cfgScreen):
   _init_controller{},
@@ -7,7 +8,8 @@ SGE::Engine::Engine(const SGE::CfgScreen & cfgScreen):
   _ttf_initializer{ std::make_shared< TTF_Initializer >() },
   _img_initializer{ std::make_shared< IMG_Initializer >() },
   _window{},
-  _renderer{}
+  _renderer{},
+  _event_manager{ std::make_shared< EventManager >() }
 {
   _init_controller.add(_sdl_initializer);
   _init_controller.add(_window_initializer);
@@ -33,6 +35,8 @@ void SGE::Engine::setScene(std::shared_ptr< SGE::Scene > scene)
 {
   _main_scene = scene;
   _main_scene->load();
+  _event_manager->set_keyboardKeycodes(_main_scene->getKeyboardEventKeeper());
+  _event_manager->set_mouseKeycodes(_main_scene->getMouseEventKeeper());
 }
 
 void SGE::Engine::run()
@@ -48,10 +52,23 @@ void SGE::Engine::run()
         this->stop();
         break;
       }
+      _event_manager->event_handle(&event);
     }
     if (!running)
     {
       break;
+    }
+
+    if (_event_manager->is_keyboardEventPressed("game_quit"))
+    {
+      std::cout << "Goodbye Keyboard!\n";
+      this->stop();
+    }
+
+    if (_event_manager->is_mouseEventPressed("game_quit"))
+    {
+      std::cout << "Goodbye Mouse!\n";
+      this->stop();
     }
 
     renderer().clear();

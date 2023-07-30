@@ -11,8 +11,14 @@ namespace
    public:
     TestScene(SGE::Engine & engine):
       _engine(engine),
-      _backupClr{ 0, 0, 0, 0 }
-    {}
+      _backupClr{ 0, 0, 0, 0 },
+      _keyboard_ekeeper{ std::make_shared< SGE::KeyboardEventKeeper >() },
+      _mouse_ekeeper{ std::make_shared< SGE::MouseEventKeeper >() }
+    {
+      _keyboard_ekeeper->register_key("game_quit", SDL_SCANCODE_Q);
+      _mouse_ekeeper->register_key("game_quit", { 400, 0, 100, 100 });
+    }
+
     ~TestScene()
     {
       this->quit();
@@ -47,10 +53,23 @@ namespace
       _engine.renderer().setDrawColor(_backupClr);
     }
 
+    SGE::KeyboardEventKeeper::ConstShared getKeyboardEventKeeper()
+    {
+      return _keyboard_ekeeper;
+    }
+
+    SGE::MouseEventKeeper::ConstShared getMouseEventKeeper()
+    {
+      return _mouse_ekeeper;
+    }
+
    private:
     SGE::Engine & _engine;
 
     SDL_Color _backupClr;
+
+    SGE::KeyboardEventKeeper::Shared _keyboard_ekeeper;
+    SGE::MouseEventKeeper::Shared _mouse_ekeeper;
   };
 }
 

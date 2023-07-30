@@ -14,6 +14,8 @@
 #include "SGE/window.hpp"
 #include "SGE/renderer.hpp"
 
+#include "SGE/events/event_manager.hpp"
+
 #include "SGE/scenes/scene.hpp"
 
 namespace SGE
@@ -49,8 +51,9 @@ namespace SGE
     std::shared_ptr< SGE::Scene > _main_scene;
     bool running;
 
+    std::shared_ptr< SGE::EventManager > _event_manager;
+
     // TODO: Scene Manager
-    // TODO: Event Manager
   };
 }
 

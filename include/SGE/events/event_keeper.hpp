@@ -50,7 +50,7 @@ namespace SGE
     codes_type _codes;
   };
 
-  using KeyboardEventKeeper = EventKeeper< SDL_Keycode >;
+  using KeyboardEventKeeper = EventKeeper< SDL_Scancode >;
   using MouseEventKeeper = EventKeeper< SDL_Rect >;
   // TODO: For Joystick
 }

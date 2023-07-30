@@ -47,7 +47,7 @@ void SGE::EventManager::unset_mouseKeycodes()
   _mouse_active.clear();
 }
 
-void SGE::EventManager::handle(SDL_Event * event)
+void SGE::EventManager::event_handle(SDL_Event * event)
 {
   switch (event->type)
   {
@@ -114,7 +114,7 @@ bool SGE::EventManager::is_mouseEventReleased(const std::string & name)
 
 void SGE::EventManager::keyboardEventHandle(SDL_Event * event, bool isPressed)
 {
-  auto keyCode = event->key.keysym.sym;
+  auto keyCode = event->key.keysym.scancode;
   auto iter = _keyboard_active.find(keyCode);
 
   if (iter != _keyboard_active.end())
@@ -125,8 +125,8 @@ void SGE::EventManager::keyboardEventHandle(SDL_Event * event, bool isPressed)
 
 void SGE::EventManager::mouseEventHandle(SDL_Event * event, bool isPressed)
 {
-  auto x = event->motion.x;
-  auto y = event->motion.y;
+  int x = event->button.x;
+  int y = event->button.y;
 
   for (auto & val: _mouse_active)
   {

@@ -28,7 +28,7 @@ namespace SGE
     /**
      * \brief Set the keyboard keycodes object.
      *
-     * \param ekeeper - EventKeeper::ConstShared object
+     * \param ekeeper EventKeeper::ConstShared object
      */
     void set_keyboardKeycodes(KeyboardEventKeeper::ConstShared ekeeper);
     void unset_keyboardKeycodes();
@@ -42,12 +42,12 @@ namespace SGE
     /**
      * \brief Set the mouse keycodes object.
      *
-     * \param ekeeper - EventKeeper::ConstShared object
+     * \param ekeeper EventKeeper::ConstShared object
      */
     void set_mouseKeycodes(MouseEventKeeper::ConstShared ekeeper);
     void unset_mouseKeycodes();
 
-    void handle(SDL_Event * event);
+    void event_handle(SDL_Event * event);
 
     bool is_keyboardEventPressed(const std::string & name);
     bool is_keyboardEventReleased(const std::string & name);

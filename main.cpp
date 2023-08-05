@@ -1,6 +1,5 @@
 #include <iostream>
-#include <SDL3/SDL.h>
-#include "SGE/engine.hpp"
+#include <SGE/SGE.hpp>
 
 #include <cmath>
 

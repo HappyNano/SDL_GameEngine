@@ -15,6 +15,3 @@ endfunction()
 # Добавляем исходные файлы в проект
 set(SOURCES "")
 add_sources_recursive(${CMAKE_CURRENT_SOURCE_DIR}/src/SGE)
-
-# Добавляем исходные файлы в основной CMakeLists.txt
-target_sources(${PROJECT_NAME} PRIVATE ${SOURCES})

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(SDL_GameEngine)
+project(SDL_GameEngine VERSION 0.2 DESCRIPTION "GameEngine on SDL v0.2")
 
 # Включаем генерацию compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -71,16 +71,32 @@ endif()
 # ====================
 
 # Добавляем пути к заголовочным файлам
-include_directories(${INCLUDE_DIR})
+
+include(${SRC_DIR}/src.cmake)
+include(GNUInstallDirs)
+
+set(lib_name "SGE")
+
+add_library(${lib_name} SHARED ${SOURCES})
+
+set_target_properties(${lib_name} PROPERTIES VERSION ${PROJECT_VERSION})
+set_target_properties(${lib_name} PROPERTIES PUBLIC_HEADER ${INCLUDE_DIR}/SGE.hpp)
+
+target_include_directories(${lib_name} PUBLIC ${INCLUDE_DIR})
+target_link_libraries(${lib_name} PUBLIC SDL3_image::SDL3_image SDL3_ttf::SDL3_ttf SDL3::SDL3)
+
+install(TARGETS ${lib_name}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 # Создаем исполняемый файл
 add_executable(${PROJECT_NAME} main.cpp)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL3_image::SDL3_image SDL3_ttf::SDL3_ttf SDL3::SDL3)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${lib_name})
+target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY})
 
-include(${SRC_DIR}/src.cmake)
 
 # ====================
 

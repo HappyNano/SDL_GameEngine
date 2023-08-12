@@ -44,3 +44,27 @@ SDL_Color SGE::Renderer::getDrawColor()
   SDL_GetRenderDrawColor(_renderer, &tmpClr.r, &tmpClr.g, &tmpClr.b, &tmpClr.a);
   return tmpClr;
 }
+
+SGE::Renderer::this_t & SGE::Renderer::drawPoint(float x, float y)
+{
+  SDL_RenderPoint(_renderer, x, y);
+  return *this;
+}
+
+SGE::Renderer::this_t & SGE::Renderer::drawLine(float x1, float y1, float x2, float y2)
+{
+  SDL_RenderLine(_renderer, x1, y1, x2, y2);
+  return *this;
+}
+
+SGE::Renderer::this_t & SGE::Renderer::drawRect(float x, float y, float w, float h)
+{
+  this->drawRect(SDL_FRect{ x, y, w, h });
+  return *this;
+}
+
+SGE::Renderer::this_t & SGE::Renderer::drawRect(const SDL_FRect & rect)
+{
+  SDL_RenderRect(_renderer, &rect);
+  return *this;
+}

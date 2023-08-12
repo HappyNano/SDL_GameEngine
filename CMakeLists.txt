@@ -79,15 +79,21 @@ set(lib_name "SGE")
 
 add_library(${lib_name} SHARED ${SOURCES})
 
+target_include_directories(${lib_name} PUBLIC
+    $<BUILD_INTERFACE:${INCLUDE_DIR}>
+    $<INSTALL_INTERFACE:include>)
+target_link_libraries(${lib_name} PUBLIC SDL3_image::SDL3_image SDL3_ttf::SDL3_ttf SDL3::SDL3)
+
 set_target_properties(${lib_name} PROPERTIES VERSION ${PROJECT_VERSION})
 set_target_properties(${lib_name} PROPERTIES PUBLIC_HEADER ${INCLUDE_DIR}/SGE.hpp)
 
-target_include_directories(${lib_name} PUBLIC ${INCLUDE_DIR})
-target_link_libraries(${lib_name} PUBLIC SDL3_image::SDL3_image SDL3_ttf::SDL3_ttf SDL3::SDL3)
-
 install(TARGETS ${lib_name}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+    ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+install(DIRECTORY ${INCLUDE_DIR} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${lib_name})
 
 # Создаем исполняемый файл
 add_executable(${PROJECT_NAME} main.cpp)

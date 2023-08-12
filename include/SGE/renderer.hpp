@@ -12,6 +12,8 @@ namespace SGE
   class Renderer final
   {
    public:
+    using this_t = Renderer;
+
     Renderer();
     Renderer(SDL_Renderer * renderer);
 
@@ -24,6 +26,11 @@ namespace SGE
     void setDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
     void setDrawColor(const SDL_Color & clr);
     SDL_Color getDrawColor();
+
+    this_t & drawPoint(float x, float y);
+    this_t & drawLine(float x1, float y1, float x2, float y2);
+    this_t & drawRect(float x, float y, float w, float h);
+    this_t & drawRect(const SDL_FRect & rect);
 
    private:
     SDL_Renderer * _renderer;
